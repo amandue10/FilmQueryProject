@@ -1,5 +1,6 @@
 package com.skilldistillery.filmquery.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Film {
@@ -15,9 +16,11 @@ public class Film {
 	private double replacementCost;
 	private String rating;
 	private String specialFeatures;
+	private List<Actor> cast;
 
 	public Film(int id, String title, String description, int releaseYear, int languageId, int rentalDuration,
-			double rentalRate, int length, double replacementCost, String rating, String specialFeatures) {
+			double rentalRate, int length, double replacementCost, String rating, String specialFeatures,
+			List<Actor> cast) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -30,10 +33,33 @@ public class Film {
 		this.replacementCost = replacementCost;
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
+		this.cast = cast;
 	}
 
 	public Film() {
 		super();
+	}
+
+	public Film(int int1, String string, String string2, int int2, int int3, int int4, int int5, double double1,
+			String string3, String string4, List<Actor> cast2, String string5) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Film(int int1, String string, String string2, int int2, int int3, int int4, int int5, double double1,
+			String string3, String string4) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Film(String title2, short releaseYear2, String rating2, String desc, String lang) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public List<Actor> getcast() {
+		return cast;
+	}
+
+	public void setcast(List<Actor> cast) {
+		this.cast = cast;
 	}
 
 	public int getid() {
@@ -152,7 +178,7 @@ public class Film {
 		return "Film [id=" + id + ", title=" + title + ", description=" + description + ", releaseYear=" + releaseYear
 				+ ", languageId=" + languageId + ", rentalDuration=" + rentalDuration + ", rentalRate=" + rentalRate
 				+ ", length=" + length + ", replacementCost=" + replacementCost + ", rating=" + rating
-				+ ", specialFeatures=" + specialFeatures + "]";
+				+ ", specialFeatures=" + specialFeatures + ", cast=" + cast + "]";
 	}
 
 }

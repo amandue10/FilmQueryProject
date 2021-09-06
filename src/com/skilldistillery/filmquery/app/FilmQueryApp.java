@@ -1,9 +1,12 @@
 package com.skilldistillery.filmquery.app;
 
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
+import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
 
 public class FilmQueryApp {
@@ -19,6 +22,13 @@ public class FilmQueryApp {
 	private void test() {
 		Film film = db.findFilmById(1);
 		System.out.println(film);
+
+		Actor actor = db.findActorById(1);
+		System.out.println(actor);
+
+		List<Actor> findActor = db.findActorsByFilmId(1);
+		System.out.println(findActor);
+
 	}
 
 	private void launch() {
@@ -41,8 +51,10 @@ public class FilmQueryApp {
 
 			switch (userInput) {
 			case 1:
+				searchByFilmId(input);
 				break;
 			case 2:
+				searchByFilmKeyword(input);
 				break;
 			case 3:
 				System.out.println("You chose to exit");
@@ -54,4 +66,38 @@ public class FilmQueryApp {
 
 	}
 
+	private void searchByFilmId(Scanner input) {
+		Film searchResult = null;
+		System.out.println("-----Search by Film ID----");
+		System.out.println("Enter Film ID (ex: 123)");
+		System.out.println("Example: 123)");
+		System.out.println("-------------------------");
+
+		try {
+			searchResult = db.findFilmById(input.nextInt());
+		} catch (InputMismatchException e) {
+			System.out.println("Invalid entry. Ids are in number format");
+		} finally {
+			input.nextLine();
+		}
+
+		if (searchResult == null)
+			System.out.println("No result found");
+		else
+			System.out.println(searchResult);
+	}
+
+	private void searchByFilmKeyword(Scanner input) {
+		System.out.println("Enter search keyword: ");
+
+		List<Film> filmsQueryResult = db.findFilmByKeyword(input.next());
+		if (!filmsQueryResult.isEmpty()) {
+
+			for (Film film : filmsQueryResult) {
+				System.out.println(film);
+
+			}
+		} else
+			System.out.println("No results found");
+	}
 }
